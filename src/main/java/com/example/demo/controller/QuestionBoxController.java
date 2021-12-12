@@ -25,7 +25,7 @@ public class QuestionBoxController {
 	 */
 	@RequestMapping("/user-register")
 	public String userRegister() {
-		return "user-confirm";
+		return "user-register";
 	}
 	
 	
@@ -33,9 +33,9 @@ public class QuestionBoxController {
 	 * ユーザー登録情報を受け取り、登録内容確認画面に遷移する
 	 * @return
 	 */
-	@RequestMapping("/user-signup")
+	@RequestMapping("/user-confirm")
 	public String userSignUp() {
-		return "redirect:user-login";
+		return "user-confirm";
 	}
 	
 	/**
@@ -44,9 +44,14 @@ public class QuestionBoxController {
 	 * 登録内容に誤りがない場合は「登録ボタン」を押すとログイン画面に遷移する
 	 * @return
 	 */
-	@RequestMapping("/")
+	@RequestMapping("/user-result")
 	public String userConfirm() {
 		return "user-confirm";
+	}
+	
+	@RequestMapping("/user-signup")
+	public String userSingUp() {
+		return "redirect:user-login";
 	}
 	
 	/**
@@ -71,5 +76,13 @@ public class QuestionBoxController {
 		return "administrator-register";
 	}
 	
+	/**
+	 * ユーザーログイン画面を表示する
+	 * @return
+	 */
+	@RequestMapping("/administrator-login")
+	public String administratorLogin() {
+		return "administrator-login";
+	}
 	
 }
