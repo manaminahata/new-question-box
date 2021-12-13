@@ -1,76 +1,102 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
- <head>
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>ユーザー登録</title>
-   <!-- BootstrapのCSS読み込み -->
-   <link href="/css/bootstrap.min.css" rel="stylesheet">
-   <!-- BootstrapのJS読み込み -->
-   <script src="/js/bootstrap.min.js"></script>
- </head>
-  <body>
-	<!-- 登録画面パンくずリスト -->
-	<!-- <img th:src="@{/img_noodle/register2.png}" style="display: block; margin: auto;"> -->
-      <!-- login form -->
-      <div class="row">
-        <div
-          class="
-            col-lg-offset-3
-            col-lg-6
-            col-md-offset-2
-            col-md-8
-            col-sm-10
-            col-xs-12
-          "
-        >
-          <div class="well">
-            <form method="post" th:action="@{/question/user-signup}">
-              <fieldset>
-                <legend>ユーザー登録</legend>
-                
-                <div class="form-group">
-                  <label for="inputName">名前:</label><br>
-                 <!--  <span th:text="${user.name}"></span> -->
-                </div>
-                
-                <div class="form-group">
-                  <label for="inputEmail">メールアドレス:</label><br>
-                  <!-- <span th:text="${user.email}"></span> -->
-                </div>
-                
-                <div class="form-group">
-                  <label for="inputZipcode">郵便番号:</label><br>
-                  <!-- <span th:text="${user.zipcode}"></span> -->
-                </div>
-                
-                <div class="form-group">
-                  <label for="inputAddress">住所:</label><br>
-                  <!-- <span th:text="${user.address}"></span> -->
-                </div>
-                
-                <div class="form-group">
-                  <label for="inputTel">電話番号:</label><br>
-                  <!-- <span th:text="${user.telephone}"></span> -->
-                </div>
-                
-                <div class="form-group">
-                  <label for="inputPassword">パスワード:</label><br>
-                  <!-- <span th:text="${passwordMaru}"></span> -->
-                </div>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body class="bg-dark">
+	<!-- ヘッダー -->
+	<nav
+		class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
+		<a class="navbar-brand" th:href="@{/question/index}">QuestionBox</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav4" aria-controls="navbarNav4"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navbarNav4">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/question/user-register}">登録</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/question/user-login}">ログイン</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">サイトについて</a></li>
+			</ul>
+		</div>
+	</nav>
 
-                
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary">登録</button>
-                  <a th:href="@{/user/toRegister}"><button type="button" class="btn btn-default">修正</button></a>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    <!-- end container -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<div class="container">
+		<div class="main container-fluid">
+			<div class="row bg-light text-dark py-5">
+				<div class="col-md-8 offset-md-2">
+					<h2 class="fs-1 mb-5 text-center fw-bold">ユーザー登録</h2>
+					<form method="post" th:action="@{/question/user-confirm}"
+						th:object="${userForm}">
+						<div class="mb-3">
+							<label for="name">名前:</label><label th:errors="*{name}"
+								class="control-label" style="color: red" for="inputError">名前を入力してください</label>
+							<input type="text" class="form-control" name="name"
+								placeholder="名前" th:value="*{name}">
+						</div>
+						<div class="mb-3">
+							<label for="zipcode">郵便番号:</label><label th:errors="*{zipcode}"
+								class="control-label" style="color: red" for="inputError">郵便番号を入力してください</label>
+							<input type="text" class="form-control" name="zipcode"
+								placeholder="郵便番号（ハイフンあり）" th:value="*{zipcode}">
+						</div>
+						<div class="mb-3">
+							<label for="address">住所:</label><label th:errors="*{address}"
+								class="control-label" style="color: red" for="inputError">住所を入力してください</label>
+							<input type="text" class="form-control" name="address"
+								placeholder="住所" th:value="${address}">
+						</div>
+						<div class="mb-3">
+							<label for="telephone">電話番号:</label><label
+								th:errors="*{telephone}" class="control-label"
+								style="color: red" for="inputError">電話番号を入力してください</label> <input
+								type="text" class="form-control" name="telephone"
+								placeholder="電話番号（ハイフンあり）" th:value="*{telephone}">
+						</div>
+						<div class="mb-3">
+							<label for="email">メールアドレス:</label><label th:errors="*{email}"
+								class="control-label" style="color: red" for="inputError">メールアドレスを入力してください</label>
+							<input type="email" class="form-control" name="email"
+								placeholder="メールアドレス" th:value="*{email}">
+						</div>
+						<div class="mb-3">
+							<label for="password">パスワード:</label><label
+								th:errors="*{password}" class="control-label" style="color: red"
+								for="inputError">パスワードを入力してください</label> <input type="password"
+								class="form-control" name="password"
+								placeholder="パスワード（8桁以上16文字以下の英数字）" thvalue="*{password}">
+						</div>
+						<div class="mb-3">
+							<input type="password" class="form-control"
+								name="result_password" placeholder="確認用パスワード（8桁以上16文字以下の英数字）"
+								th:value="*{password}">
+						</div>
+						<div class="form-check mb-4">
+							<input class="form-check-input" type="checkbox" value=""
+								id="flexCheckIndeterminate"> <label
+								class="form-check-label" for="flexCheckIndeterminate">
+								利用規約に同意します。<a href="" target="_blank" rel="noopener noreferrer"
+								class="text-decoration-underline text-dark">プライバシーポリシーはこちら</a>
+							</label>
+						</div>
+						<div class="text-center pt-4 col-md-6 offset-md-3">
+							<button type="submit" class="btn btn-primary">送信</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

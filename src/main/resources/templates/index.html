@@ -13,7 +13,7 @@
 <body>
 	<!-- ヘッダー -->
 	<nav
-		class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
+		class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
 		<a class="navbar-brand" th:href="@{/question/index}">QuestionBox</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav4" aria-controls="navbarNav4"
@@ -31,22 +31,23 @@
 			</ul>
 		</div>
 	</nav>
-
-
-
-
-
-
-
-
-
-
+	<!-- メイン -->
+	<div class="text-center bg-info bg-gradient">
+		<img class="d-block mx-auto" src="../img/index.png"
+			alt="" width="500" height="500">
+		<div class="col-lg-6 mx-auto">
+			<p class="lead">わからないことは積極的に質問してみよう</p>
+		</div>
+	</div>
 	<!-- フッター -->
-	<footer class="bg-secondary my-5 pt-5 text-muted text-center text-small">
+	<footer
+		class="bg-secondary text-muted text-center text-small">
 		<p class="mb-1 text-light">&copy; 2021 Nahata Manami</p>
 		<ul class="list-inline">
-			<li class="list-inline-item"><a th:href="@{/question/administrator-login}">管理者ログイン</a></li>
-			<li class="list-inline-item"><a th:href="@{/question/administrator-register}">管理者登録</a></li>
+			<li class="list-inline-item"><a
+				th:href="@{/question/administrator-login}">管理者ログイン</a></li>
+			<li class="list-inline-item"><a
+				th:href="@{/question/administrator-register}">管理者登録</a></li>
 		</ul>
 	</footer>
 	<!-- jQueryの読み込み -->
