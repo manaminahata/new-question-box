@@ -14,7 +14,7 @@
 	<!-- ヘッダー -->
 	<nav
 		class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
-		<a class="navbar-brand" th:href="@{/question/index}">QuestionBox</a>
+		<a class="navbar-brand" th:href="@{/questionbox/index}">QuestionBox</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav4" aria-controls="navbarNav4"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -24,24 +24,25 @@
 			id="navbarNav4">
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link"
-					th:href="@{/question/user-register}">登録</a></li>
+					th:href="@{/questionbox/user-register}">登録</a></li>
 				<li class="nav-item"><a class="nav-link"
-					th:href="@{/question/user-login}">ログイン</a></li>
+					th:href="@{/questionbox/user-login}">ログイン</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">サイトについて</a></li>
 			</ul>
 		</div>
 	</nav>
 	<!-- メイン -->
-	<div class="text-center bg-info bg-gradient">
+	<div class="text-center bg-info bg-dark">
 		<img class="d-block mx-auto" src="../img/index.png"
 			alt="" width="500" height="500">
 		<div class="col-lg-6 mx-auto">
-			<p class="lead">わからないことは積極的に質問してみよう</p>
+			<span class="text-light">わからないことは積極的に質問してみよう</span><br>
+			<span class="text-light">新たな発見があるかも...</span>
 		</div>
 	</div>
 	<!-- フッター -->
 	<footer
-		class="bg-secondary text-muted text-center text-small">
+		class="bg-dark text-muted text-center text-small py-5">
 		<p class="mb-1 text-light">&copy; 2021 Nahata Manami</p>
 		<ul class="list-inline">
 			<li class="list-inline-item"><a

@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>ユーザーログイン</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
 </head>
-<body>
-<h1>ユーザーログイン</h1>
+<body class="bg-dark">
+	<!-- ヘッダー -->
+	<nav
+		class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
+		<a class="navbar-brand" th:href="@{/questionbox/index}">QuestionBox</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav4" aria-controls="navbarNav4"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navbarNav4">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/questionbox/user-register}">登録</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/questionbox/user-login}">ログイン</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">サイトについて</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- パンくずリスト -->
+	<ol class="breadcrumb">
+		<li><a href="user-register.html" th:href="@{/questionbox/index}">ホーム画面</a></li>
+		<li class="active">ユーザーログイン</li>
+	</ol>
+	<!-- ユーザー登録 -->
+	<div class="container">
+		<div class="main container-fluid">
+			<div class="row bg-light text-dark py-5">
+				<div class="col-md-8 offset-md-2">
+					<h2 class="fs-1 mb-5 text-center fw-bold">ユーザーログイン</h2>
+					<form method="post" th:action="@{/questionbox/}"
+						th:object="${userForm}">
+						<div class="mb-3">
+							<label for="email">メールアドレス</label><label th:errors="*{email}"
+								class="control-label" style="color: red" for="inputError">メールアドレスを入力してください</label>
+							<input type="email" class="form-control" name="email"
+								placeholder="メールアドレス" th:value="*{email}">
+						</div>
+						<div class="mb-3">
+							<label for="password">パスワード</label><label
+								th:errors="*{password}" class="control-label" style="color: red"
+								for="inputError">パスワードを入力してください</label> <input type="password"
+								class="form-control" name="password"
+								placeholder="パスワード（8桁以上16文字以下の英数字）" thvalue="*{password}">
+						</div>
+						<div class="text-center pt-4 col-md-6 offset-md-3">
+							<button type="submit" class="btn btn-primary">ログイン</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/fetch-jsonp@1.1.3/build/fetch-jsonp.min.js"></script>
 </body>
 </html>

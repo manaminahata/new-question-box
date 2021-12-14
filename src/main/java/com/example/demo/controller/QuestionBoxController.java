@@ -14,7 +14,7 @@ import com.example.demo.form.UserForm;
 import com.example.demo.service.UserService;
 
 @Controller
-@RequestMapping("/question")
+@RequestMapping("/questionbox")
 public class QuestionBoxController {
 	
 	////////////////////////////////
@@ -39,7 +39,7 @@ public class QuestionBoxController {
 	private UserService userService;
 	
 	/**
-	 * ユーザー登録画面を表示させるメソッド
+	 * ユーザー情報入力画面を表示させるメソッド
 	 * @return
 	 */
 	@RequestMapping("/user-register")
@@ -48,7 +48,9 @@ public class QuestionBoxController {
 	}
 	
 	/**
-	 * ユーザー登録情報を受け取り、登録内容確認画面に遷移する
+	 * 入力されたユーザー情報を受け取り、内容を表示する
+	 * 登録内容を修正する場合は「修正ボタン」を押すと「userSignUpメソッド」に遷移する
+	 * 登録内容に誤りがない場合は「登録ボタン」を押すとログイン画面に遷移する
 	 * @return
 	 */
 	@RequestMapping("/user-confirm")
@@ -71,19 +73,12 @@ public class QuestionBoxController {
 	}
 	
 	/**
-	 * 登録した内容を表示する
-	 * 登録内容を修正する場合は「修正ボタン」を押すと「userSignUpメソッド」に遷移する
-	 * 登録内容に誤りがない場合は「登録ボタン」を押すとログイン画面に遷移する
+	 * 登録完了の表示とログインへの誘導を行う
 	 * @return
 	 */
 	@RequestMapping("/user-result")
 	public String userConfirm() {
-		return "user-confirm";
-	}
-	
-	@RequestMapping("/user-signup")
-	public String userSingUp() {
-		return "redirect:user-login";
+		return "user-result";
 	}
 	
 	/**
