@@ -16,37 +16,35 @@
 			<div class="row bg-light text-dark py-5">
 				<div class="col-md-8 offset-md-2">
 					<h2 class="fs-1 mb-5 text-center fw-bold">ユーザー登録</h2>
-					<form method="post" th:action="@{/question/result}"
+					<form method="post" th:action="@{/questionbox/user-result}"
 						th:object="${userForm}">
 						<div class="mb-3">
-							<label for="name">名前：</label>
-							<span th:text="*{name}">山田花子</span>
+							<label for="name">名前：</label> <span th:text="*{name}">山田花子</span>
 						</div>
 						<div class="mb-3">
-							<label for="zipcode">郵便番号</label>
-							<span th:text="*{zipcode}">111-1111</span>
+							<label for="zipcode">郵便番号：</label> <span th:text="*{zipcode}">111-1111</span>
 						</div>
 						<div class="mb-3">
-							<label for="address">住所</label>
+							<label for="address">住所：</label>
 							<spam th:text="*{address}">東京都〇〇区□□1-2-3</spam>
 						</div>
 						<div class="mb-3">
-							<label for="telephone">電話番号:</label>
-							<span th:text="*{telephone}">000-0000-0000</span>
+							<label for="telephone">電話番号：</label> <span th:text="*{telephone}">000-0000-0000</span>
 						</div>
 						<div class="mb-3">
-							<label for="email">メールアドレス:</label>
-							<span th:text="*{email}">h.yamada@sample.com</span>
+							<label for="email">メールアドレス：</label> <span th:text="*{email}">h.yamada@sample.com</span>
 						</div>
 						<div class="mb-3">
-							<label for="password">パスワード:</label>
-							<span th:text="*{password}">abc123456</span>
+							<label for="password">パスワード：</label> <span th:text="*{password}">abc123456</span>
 						</div>
 						<div class="mb-3">
-							<span th:text="*{password}"></span>
+							<label for="password">確認用パスワード：</label> <span
+								th:text="*{password}"></span>
 						</div>
-						<div class="text-center pt-4 col-md-6 offset-md-3">
+						<div class="form-group">
 							<button type="submit" class="btn btn-primary">登録</button>
+							<a th:href="@{/questionbox/user-register}"><button type="button"
+									class="btn btn-default">修正</button></a>
 						</div>
 					</form>
 				</div>
