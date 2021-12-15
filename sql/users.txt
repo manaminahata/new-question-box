@@ -1,0 +1,18 @@
+use questionbox;
+
+DROP TABLE IF EXISTS users;
+
+create table users (
+id int auto_increment,
+name varchar(100) not null,
+email varchar(100) not null unique,
+password varchar(100) not null,
+zipcode varchar(8) not null,
+address varchar(200) not null,
+telephone varchar(15) not null,
+primary key(id)
+);
+
+insert into users (name, email, password, zipcode, address, telephone)
+value ('ユーザー　一郎', 'ichiro.yamada@sample.com', 'ichiro123', '160-0022', '東京都新宿区新宿4町目3-2-5 TOKYU REIT新宿ビル8F', '080-1111-1111'),
+('ユーザー　花子', 'hanako.yamada@sample.com', 'hanako123', '160-0022', '東京都新宿区新宿4町目3-2-5 TOKYU REIT新宿ビル8F', '080-1111-1111');

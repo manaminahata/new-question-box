@@ -1,0 +1,17 @@
+use questionbox;
+
+DROP TABLE IF EXISTS questions;
+
+create table questions (
+id int auto_increment,
+title varchar(100),
+question varchar(3000) not null,
+user_id int not null,
+answer_id int,
+primary key(id)
+);
+
+insert into questions(title, question, user_id) 
+values('Mybatisについての質問です。', 'MyBatisの使い方を教えてください。', 1),
+('MySQLについての質問です', 'MySQLの設定がうまくいきません。解決方法を教えてください。', 1),
+('Dockerについての質問です。', 'Dockerの仕組みがいまいち理解できていません。', 1);
