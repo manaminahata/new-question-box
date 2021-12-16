@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -26,10 +27,14 @@ public interface UserMapper {
     /** ユーザー情報を全件取得する */
 	@Select("select * from users;")
     public List<User> findByUsers();
+	
+    /** メールアドレスとパスワードが一致したレコードを取得する */
+	@Select("select * from users where email = #{email} and password = #{password};")
+	public User findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
     /** idが一致するユーザーの情報を取得する */
 	@Select("select * from users where id = #{id}")
-    public User findByOne(Integer id);
+    public User findByOne(@Param("id") int id);
 
     /** ユーザー情報を更新する */
     @Update("update users set name = #{name}, email = #{email}, password = #{password},"
