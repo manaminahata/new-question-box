@@ -1,88 +1,64 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.domain.Question;
+import com.example.demo.form.QuestionForm;
+import com.example.demo.form.UserForm;
+import com.example.demo.service.QuestionService;
+
+/**
+ * トップ画面表示
+ * @author manami
+ *
+ */
 @Controller
-@RequestMapping("/question")
+@RequestMapping("/questionbox")
 public class QuestionBoxController {
 	
+	@Autowired
+	private QuestionService questionService;
+	
+	@ModelAttribute
+	public QuestionForm questionSetUpForm() {
+		return new QuestionForm();
+	}
+	
+	@ModelAttribute
+	public UserForm userSetUpForm() {
+		return new UserForm();
+	}
+	
 	////////////////////////////////
-	//　　　　　インデックス表示　　　　//
+	//　　　　　　トップ画面表示　　　　//
 	////////////////////////////////
 	
+	/**
+	 * トップ画面表示
+	 * @return
+	 */
 	@RequestMapping("/index")
 	public String index() {
 		return "index";
 	}
 	
 	////////////////////////////////
-	//　　　　　　　ユーザー　　　　　　//
-	////////////////////////////////
-	/**
-	 * ユーザー登録画面を表示させるメソッド
-	 * @return
-	 */
-	@RequestMapping("/user-register")
-	public String userRegister() {
-		return "user-register";
-	}
-	
-	
-	/**
-	 * ユーザー登録情報を受け取り、登録内容確認画面に遷移する
-	 * @return
-	 */
-	@RequestMapping("/user-confirm")
-	public String userSignUp() {
-		return "user-confirm";
-	}
-	
-	/**
-	 * 登録した内容を表示する
-	 * 登録内容を修正する場合は「修正ボタン」を押すと「userSignUpメソッド」に遷移する
-	 * 登録内容に誤りがない場合は「登録ボタン」を押すとログイン画面に遷移する
-	 * @return
-	 */
-	@RequestMapping("/user-result")
-	public String userConfirm() {
-		return "user-confirm";
-	}
-	
-	@RequestMapping("/user-signup")
-	public String userSingUp() {
-		return "redirect:user-login";
-	}
-	
-	/**
-	 * ユーザーログイン画面を表示する
-	 * @return
-	 */
-	@RequestMapping("/user-login")
-	public String userLogin() {
-		return "user-login";
-	}
-	
-	////////////////////////////////
-	//　　　　　　　 管理者　　　　　  //
+	//　　　　　　　質問投稿　　　　　  //
 	////////////////////////////////
 	
-	/**
-	 * 管理者登録画面を表示させるメソッド
-	 * @return
-	 */
-	@RequestMapping("/administrator-register")
-	public String administratorRegister() {
-		return "administrator-register";
-	}
-	
-	/**
-	 * ユーザーログイン画面を表示する
-	 * @return
-	 */
-	@RequestMapping("/administrator-login")
-	public String administratorLogin() {
-		return "administrator-login";
-	}
-	
+//	/**
+//	 * 質問を投稿する
+//	 * @return
+//	 */
+//	@RequestMapping("/post-question")
+//	public String postQuestion(QuestionForm questionForm, UserForm userForm, Model model) {
+//		Question question = questionService.postQuestion(questionForm.getTitle(), questionForm.getQuestion(), userForm.getId());
+//		
+//		
+//		return "redirect:questionbox";
+//	}
 }

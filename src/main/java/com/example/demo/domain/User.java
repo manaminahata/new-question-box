@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+
 /**
  * DB接続時に利用するドメイン
  * @author manami

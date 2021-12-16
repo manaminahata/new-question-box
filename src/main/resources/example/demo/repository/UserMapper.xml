@@ -2,23 +2,52 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.repository.UserMapper">
+<mapper namespace="com.example.demo.repository.UserMapper">
 
-    <insert id="insert">
-        insert into users(name, email, password, zipcode, address, telephone) 
-        values(#{name},#{email},#{password},#{zipcode},#{address},#{telephone});
-    </insert>
+	<resultMap type="com.example.demo.domain.User" id="userMap">
+		<id column="i_id" property="id" />
+		<result column="u_name" property="name" />
+		<result column="u_email" property="email" />
+		<result column="u_password" property="password" />
+		<result column="u_zipcode" property="zipcode" />
+		<result column="u_address" property="address" />
+		<result column="u_telephone" property="telephone" />
+	</resultMap>
 
-    <select id="findByUsers" resultType="com.example.domain.User">
-        select * from users;
-    </select>
+	<resultMap type="com.example.demo.domain.Question"
+		id="questionMap">
+		<result column="q_id" property="id" />
+		<result column="q_title" property="title" />
+		<result column="q_question" property="question" />
+		<result column="q_answerList" property="answerList" />
+	</resultMap>
 
-    <update id="updateUser">
-        update users set name = #{name}, email = #{email}, password = #{password}, zipcode = #{zipcode}, address = #{address}, telephone = #{telephone} where id = #{id};
-    </update>
+	<insert id="insert">
+		insert into users(name, email, password, zipcode, address, telephone)
+		values(#{name},#{email},#{password},#{zipcode},#{address},#{telephone});
+	</insert>
 
-    <delete id="deleteUser">
-        delete from users where id = #{id};
-    </delete>
+	<insert id="insert">
+		insert into questions(name, email, password, zipcode, address, telephone)
+		values(#{name},#{email},#{password},#{zipcode},#{address},#{telephone});
+	</insert>
+
+	<select id="findByUsers" resultType="com.example.domain.User">
+		select * from users;
+	</select>
+
+	<select id="findByEmailAndPassword">
+		select * from users where email=#{email} and password=#{password};
+	</select>
+
+	<update id="updateUser">
+		update users set name = #{name}, email = #{email}, password = #{password},
+		zipcode = #{zipcode}, address = #{address}, telephone = #{telephone}
+		where id = #{id};
+	</update>
+
+	<delete id="deleteUser">
+		delete from users where id = #{id};
+	</delete>
 
 </mapper>
