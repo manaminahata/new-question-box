@@ -34,20 +34,20 @@
 			<div class="row bg-light text-dark py-5">
 				<div class="col-md-8 offset-md-2">
 					<h2 class="fs-1 mb-5 text-center fw-bold"></h2>
-					<form method="post" th:action="@{/questionbox/user-main}">
+					<form method="post" th:action="@{/questionbox/post-question}" th:object="${questionForm}">
 						<h2 class="fs-1 mb-5 text-center fw-bold">Let's ask everyone!</h2>
 						<div class="mb-4">
 							<input class="form-control" name="tatle"
-								placeholder="タイトルを入力してください">
+								placeholder="タイトルを入力してください" th:value="*{title}">
 						</div>
 						<div class="mb-4">
 							<textarea class="form-control" name="question" rows="5"
-								placeholder="質問を入力してください"></textarea>
+								placeholder="質問を入力してください" th:value="*{question}"></textarea>
 						</div>
 						<div class="text-center pt-4 col-md-6 offset-md-3">
 							<button type="submit" class="btn btn-primary">POST</button>
 						</div>
-						<input type="hidden">
+						<input type="hidden" name="user_id" th:value="*{userId}">
 					</form>
 				</div>
 			</div>

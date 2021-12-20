@@ -35,10 +35,12 @@
 		<h2 class="fs-1 text-center fw-bold text-light">Everyone's question</h2>
 		{% for comment in object_list %}
 		<div class="card mb-3" th:each="question:${questionList}">
+		<a class="text-decoration-none text-dark" th:href="@{/questionbox/user-questionDetail?id=} + ${question.id}">
 			<div class="card-body">
 				<h5 class="card-title" th:text="${question.title}">{{ comment.title }}</h5>
 				<p class="card-text" th:text="${question.question}">{{ comment.body }}</p>
 			</div>
+		</a>
 		</div>
 		{% endfor %}
 	</div>
