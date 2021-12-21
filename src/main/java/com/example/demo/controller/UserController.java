@@ -2,20 +2,21 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.domain.Answer;
 import com.example.demo.domain.Question;
-import com.example.demo.domain.User;
+import com.example.demo.form.AnswerForm;
 import com.example.demo.form.QuestionForm;
 import com.example.demo.form.UserForm;
+import com.example.demo.form.UserLoginForm;
 import com.example.demo.service.QuestionService;
 import com.example.demo.service.UserService;
 
@@ -28,128 +29,100 @@ import com.example.demo.service.UserService;
 @RequestMapping("/questionbox")
 public class UserController {
 	
+	@Autowired
+	private HttpSession session;
+	
 	@ModelAttribute
 	private UserForm setUpUserForm() {
 		return new UserForm();
 	}
 	
+	@ModelAttribute
+	private UserLoginForm setUpUserLoginForm() {
+		return new UserLoginForm();
+	}
+	
+	@ModelAttribute
+	private AnswerForm setUpAnswerForm() {
+		return new AnswerForm();
+	}
+	
 	@Autowired
 	private UserService userService;
 	
-	////////////////////////////////
-	//　　　　　　ユーザー登録　　　　　//
-	////////////////////////////////
+	@Autowired
+	private QuestionService questionService;
 	
-	/**
-	 * ユーザー情報入力画面を表示させるメソッド
-	 * @return
-	 */
-	@RequestMapping("/user-register")
-	public String userRegister() {
-		return "user-register";
-	}
-	
-	/**
-	 * 入力されたユーザー情報を受け取り、内容を表示する
-	 * 登録内容を修正する場合は「修正ボタン」を押すと「userSignUpメソッド」に遷移する
-	 * 登録内容に誤りがない場合は「登録ボタン」を押すとログイン画面に遷移する
-	 * @return
-	 */
-	@RequestMapping(value = "/user-confirm", method = RequestMethod.POST)
-	public String userSignUp(@Validated UserForm userForm, BindingResult result, Model model) {
-		
-		/* 登録情報に不備がある場合、登録画面に戻る */
-		if (result.hasErrors()) {
-			return "user-register";
-		}
-		
-		/* 登録内容が正常の場合、登録内容確認画面に遷移する */
-		User user = new User();
-		BeanUtils.copyProperties(userForm, user);
-		userService.signUp(user);
-		model.addAttribute(user);
-		
-		System.out.println(user);
-		
-		return "user-confirm";
-	}
-	
-	/**
-	 * 登録完了の表示とログインへの誘導を行う
-	 * @return
-	 */
-	@RequestMapping("/user-result")
-	public String userConfirm() {
-		return "user-result";
-	}
-	
-	////////////////////////////////
-	//　　　　　　　ログイン　　　　　　//
-	////////////////////////////////
-	
-	/**
-	 * ユーザーログイン画面を表示する
-	 * @return
-	 */
-	@RequestMapping("/user-login")
-	public String userLogin() {
-		return "user-login";
-	}
-	
-	/**
-	 * ユーザーログイン処理を実行する
-	 * @return
-	 */
-	@RequestMapping("/user-signin")
-	public String userSignIn(@Validated UserForm form, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "user-login";
-		}
-		System.out.println(form.getEmail());
-		System.out.println(form.getPassword());
-		User user = userService.userLogin(form.getEmail(), form.getPassword());
-		BeanUtils.copyProperties(form, user);
-		model.addAttribute("user", user);
-		return "questionbox";
-	}
 	
 	////////////////////////////////
 	//　　　　　　　質問機能　　　　　　//
 	////////////////////////////////
 	
 	/**
-	 * 質問投稿一覧画面の表示
+	 * 質問一覧画面の表示
+	 * 投稿された質問を最新の投稿順に表示する
 	 * @return
 	 */
 	@RequestMapping("/user-main")
 	public String mainView(Model model) {
-		List<Question> questionList = userService.showQuestions();
+		List<Question> questionList = userService.showQuestionList();
 		model.addAttribute("questionList", questionList);
 		return "questionbox";
 	}
 	
 	/**
 	 * 質問投稿画面の表示
-	 * @return
+	 * @return 
 	 */
 	@RequestMapping("/question-form")
 	public String thorwQuestion(QuestionForm questionForm, Model model) {
-		
 		return "question-form";
 	}
 	
 	/**
+	 * 質問詳細と回答を表示する
+	 * @return
+	 */
+	@RequestMapping("/user-questionDetail")
+	public String questionDetail(int id, Model model) {
+		Question question = questionService.findByQuestionAndAnswer(id);
+//		BeanUtils.copyProperties(questionForm, question);
+		System.out.println("asdfghjkl;");
+		System.out.println(question);
+		session.setAttribute("question", question);
+		return "question-detail";
+	}
+	
+	/**
 	 * 質問投稿
+	 * 「投稿」を押すとメインの画面に戻り、最新の投稿が一番上に表示される
 	 * @return
 	 */
 	@RequestMapping("/post-question")
 	public String postQuestion(QuestionForm questionForm, Model model) {
 		Question question = new Question();
 		BeanUtils.copyProperties(questionForm, question);
+		question.setUserId(questionForm.getUserId());
 		userService.postQuestion(question);
 		model.addAttribute("question", question);
-		return "redirect:questionbox";
+		return "redirect:/questionbox/user-main";
 	}
 	
+	////////////////////////////////
+	//　　　　　 質問回答機能　　　　　//
+	////////////////////////////////
+	
+	/**
+	 * 質問に対して回答する
+	 * @return
+	 */
+	@RequestMapping("/post-answer")
+	public String postAnswer(AnswerForm answerForm, Model model) {
+		Answer answer = new Answer();
+		BeanUtils.copyProperties(answerForm, answer);
+		userService.postAnswer(answer);
+		model.addAttribute("answer", answer);
+		return "redirect:/questionbox/user-questionDetail?id=" + answerForm.getQuestionId();
+	}
 	
 }
