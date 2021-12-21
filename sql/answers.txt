@@ -11,5 +11,5 @@ question_id int not null,
 primary key(id)
 );
 
-insert into (answer, user_id, question_id)
+insert into answers(answer, user_id, question_id)
 values ('MyBatisはO/Rマッパーの一つでSQLを使って柔軟にDBとのデータの受け渡しができることが特徴です。', 2, 1);
