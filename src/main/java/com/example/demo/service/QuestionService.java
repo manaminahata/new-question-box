@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,8 @@ public class QuestionService {
 	@Autowired
 	private QuestionMapper questionMapper;
 	
-//	/**
-//	 * 質問を投稿する
-//	 * @return
-//	 */
-//	public void postQuestion(String title, String question, int userId) {
-//		questionMapper.insert(title, question, userId);
-//	}
+	public Question findByQuestionAndAnswer(int id) {
+		Question question = questionMapper.findByQuestionAndAnswer(id);
+		return question;
+	}
 }
