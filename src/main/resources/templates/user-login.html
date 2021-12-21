@@ -42,8 +42,10 @@
 			<div class="row bg-light text-dark py-5">
 				<div class="col-md-8 offset-md-2">
 					<h2 class="fs-1 mb-5 text-center fw-bold">ユーザーログイン</h2>
-					<form method="post" th:action="@{/questionbox/user-main}"
-						th:object="${userForm}">
+					<label th:if="${comment}" class="control-label" style="color: red"
+						for="inputError" th:text="${comment}">ダミー</label>
+					<form method="post" th:action="@{/questionbox/user-signin}"
+						th:object="${userLoginForm}">
 						<div class="mb-3">
 							<label for="email">メールアドレス</label><label th:errors="*{email}"
 								class="control-label" style="color: red" for="inputError">メールアドレスを入力してください</label>
@@ -55,7 +57,7 @@
 								th:errors="*{password}" class="control-label" style="color: red"
 								for="inputError">パスワードを入力してください</label> <input type="password"
 								class="form-control" name="password"
-								placeholder="パスワード（8桁以上16文字以下の英数字）" thvalue="*{password}">
+								placeholder="パスワード（8桁以上16文字以下の英数字）" th:value="*{password}">
 						</div>
 						<div class="text-center pt-4 col-md-6 offset-md-3">
 							<button type="submit" class="btn btn-primary">ログイン</button>

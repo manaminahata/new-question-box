@@ -12,6 +12,7 @@ public class Question {
 	private String title;
 	private String question;
 	private List<Answer> answerList;
+	private User user;
 	private int userId;
 	
 	public int getId() {
@@ -38,17 +39,23 @@ public class Question {
 	public void setAnswerList(List<Answer> answerList) {
 		this.answerList = answerList;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", title=" + title + ", question=" + question + ", answerList=" + answerList
-				+ ", userId=" + userId + "]";
+				+ ", user=" + user + ", userId=" + userId + "]";
 	}
+	
 	
 }
