@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.UserMapper">
+	
+	<!-- usersテーブルを元にquestionsテーブル、answersテーブルの情報を -->
+	<resultMap type="com.example.demo.domain.User" id="userMapper">
+		<id property="id" column="u_id"/>
+		<result property="name" column="u_name" />
+		<result property="email" column="u_email" />
+		<result property="password" column="u_password" />
+		<result property="zipcode" column="u_zipcode" />
+		<result property="address" column="u_address" />
+		<result property="telephone" column="u_telephone" />
+		<collection property="questionList" ofType="com.example.demo.domain.Question">
+			<id property="id" column="q_id" />
+			<result property="title" column="q_title" />
+			<result property="question" column="q_question" />
+			<result property="userId" column="q_userId" />
+			<result property="answerId" column="q_answer_id" />
+			<collection property="answerList" ofType="com.example.demo.domain.Answer">
+				<id property="id" column="a_id" />
+				<result property="userId" column="a_user_id" />
+				<result property="administratorId" column="a_administrator_id" />
+				<result property="answer" column="a_answer" />
+				<result property="questionId" column="a_question_id" />
+			</collection>
+		</collection>
+	</resultMap>
+
+
+	<select id="postQuestion" resultMap="userMapper">
+		select users.id as u_id, users.name as u_name, questions.id as q_id, questions.title as q_title, questions.question as q_question  
+		 from users left join questions on users.id = questions.user_id where users.id = #{id};
+	</select>
+
+	<insert id="insert">
+		insert into users(name, email, password, zipcode,
+		address, telephone)
+		values(#{name},#{email},#{password},#{zipcode},#{address},#{telephone});
+	</insert>
+
+	<select id="findByUsers"
+		resultType="com.example.demo.domain.User">
+		select * from users;
+	</select>
+
+	<select id="findByEmailAndPassword"
+		resultType="com.example.demo.domain.User">
+		select * from users where email = #{email} and password =
+		#{password};
+	</select>
+
+	<update id="updateUser">
+		update users set name = #{name}, email = #{email},
+		password = #{password},
+		zipcode = #{zipcode}, address = #{address},
+		telephone = #{telephone}
+		where id = #{id};
+	</update>
+
+	<delete id="deleteUser">
+		delete from users where id = #{id};
+	</delete>
+
+</mapper>

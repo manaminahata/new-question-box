@@ -5,20 +5,20 @@
 <mapper namespace="com.example.demo.repository.AnswerMapper">
 
 	
-	<select id="findByAnswer" resultMap="AnswerMap">
+	<!-- <select id="findByAnswer" resultMap="AnswerMap">
 		select * from answers;
-	</select>
+	</select> -->
 	
     <insert id="insert">
-        insert into answers(answer, question_id) values(#{answer}, #{question_id});
+    	insert into answers(answer, user_id, question_id) values(#{answer}, #{userId}, #{questionId});
     </insert>
 
-    <update id="updateAnswer">
+   <!--  <update id="updateAnswer">
 		update answers set answer = #{answer}, question_id = #{question_id} where id = #{id};
     </update>
 
     <delete id="deleteAnswer">
         delete from answers where id = #{id};
-    </delete>
+    </delete> -->
 
 </mapper>

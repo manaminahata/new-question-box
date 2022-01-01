@@ -3,12 +3,12 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.Answer;
 import com.example.demo.domain.Question;
 import com.example.demo.domain.User;
-import com.example.demo.form.UserForm;
+import com.example.demo.repository.AnswerMapper;
 import com.example.demo.repository.QuestionMapper;
 import com.example.demo.repository.UserMapper;
 
@@ -19,6 +19,9 @@ public class UserService {
 	
 	@Autowired
 	private QuestionMapper questionMapper;
+	
+	@Autowired
+	private AnswerMapper answerMapper;
 	
 	/**
 	 * ユーザー情報登録用
@@ -43,8 +46,8 @@ public class UserService {
 	/**
 	 * 投稿された質問の全件情報を取得する
 	 */
-	public List<Question> showQuestions() {
-		List<Question> questionList = questionMapper.findByQuestions();
+	public List<Question> showQuestionList() {
+		List<Question> questionList = questionMapper.findByAll();
 		return questionList;
 	}
 	
@@ -54,5 +57,9 @@ public class UserService {
 	 */
 	public void postQuestion(Question question) {
 		questionMapper.insert(question);
+	}
+	
+	public void postAnswer(Answer answer) {
+		answerMapper.insert(answer);
 	}
 }

@@ -3,8 +3,8 @@ package com.example.demo.domain;
 public class Answer {
 	private Integer id;
 	private String answer;
-	private Integer question_id;
-	private Integer user_id;
+	private Integer questionId;
+	private Integer userId;
 	
 	public Integer getId() {
 		return id;
@@ -18,23 +18,23 @@ public class Answer {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public Integer getQuestion_id() {
-		return question_id;
+	public Integer getQuestionId() {
+		return questionId;
 	}
-	public void setQuestion_id(Integer question_id) {
-		this.question_id = question_id;
+	public void setQuestionId(Integer questionId) {
+		this.questionId = questionId;
 	}
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	@Override
 	public String toString() {
-		return "Answer [id=" + id + ", answer=" + answer + ", question_id=" + question_id + ", user_id=" + user_id
-				+ "]";
+		return "Answer [id=" + id + ", answer=" + answer + ", questionId=" + questionId + ", userId=" + userId + "]";
 	}
+
 	
 }

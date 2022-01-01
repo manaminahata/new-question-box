@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>タイトル</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
 </head>
-<body>
-質問詳細
+<body class="bg-dark">
+	<!-- ヘッダー -->
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
+		<a class="navbar-brand" th:href="@{/questionbox/index}">QuestionBox</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/questionbox/user-main}">ホーム</a></li>
+				<!-- 個人情報の変更ができるように設定 -->
+				<li class="nav-item"><a class="nav-link" href="#">アカウント</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/questionbox/user-logout}">ログアウト</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- 質問詳細表示 -->
+	<div class="container">
+		<h2 class="fs-1 text-center fw-bold text-light">Everyone's question</h2>
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title" th:text="${session.question.title}">質問のタイトル</h5>
+				<p class="card-text" th:text="${session.question.question}">質問内容</p>
+				<hr>
+				<div class="card-text" th:each="answer:${session.question.answerList}">
+					<p class="card-text" th:text="${answer.answer}">質問に対する回答</p>
+					<hr>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="container">
+	<!-- 質問回答用フォーム -->
+		<h3 class="fs-1 text-center fw-bold text-light">Answer the question</h3>
+			<form th:action="@{/questionbox/post-answer}" method="post" th:object="${answerForm}">
+				<br>
+				<textarea name="answer" class="form-control" th:value="*{answer}"></textarea><br>
+				<input type="hidden" name="questionId" th:value="${session.question.id}">
+				<input type="hidden" name="userId" th:value="${session.user.id}">
+				<div class="text-center">
+					<button type="submit" class="btn btn-outline-light">回答</button>
+				</div>
+			</form>
+	</div>
+	<!-- フッター -->
+	<footer class="bg-dark text-muted text-center text-small py-5">
+		<p class="mb-1 text-light">&copy; 2021 Nahata Manami</p>
+			<ul class="list-inline">
+				<li class="list-inline-item">
+					<a class="text-decoration-none text-secondary" th:href="@{/question/administrator-login}">管理者ログイン</a>
+				</li>
+				<li class="list-inline-item">
+					<a class="text-decoration-none text-secondary" th:href="@{/question/administrator-register}">管理者登録</a>
+				</li>
+			</ul>
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/fetch-jsonp@1.1.3/build/fetch-jsonp.min.js"></script>
 </body>
 </html>

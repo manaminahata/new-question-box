@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import java.util.List;
 
 /**
  * DB接続時に利用するドメイン
@@ -14,6 +15,7 @@ public class User {
 	private String zipcode;
 	private String address;
 	private String telephone;
+	private List<Question> questionList;
 	
 	public int getId() {
 		return id;
@@ -57,12 +59,19 @@ public class User {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	public List<Question> getQuestionList() {
+		return questionList;
+	}
+	public void setQuestionList(List<Question> questionList) {
+		this.questionList = questionList;
+	}
 	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", zipcode="
-				+ zipcode + ", address=" + address + ", telephone=" + telephone + "]";
+				+ zipcode + ", address=" + address + ", telephone=" + telephone + ", questionList=" + questionList
+				+ "]";
 	}
-
+	
 	
 }

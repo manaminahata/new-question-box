@@ -6,6 +6,7 @@ public class QuestionForm {
 	private String question;
 	private int userId;
 	
+	
 	public int getId() {
 		return id;
 	}
@@ -27,7 +28,7 @@ public class QuestionForm {
 	public int getUserId() {
 		return userId;
 	}
-	public void setUser_id(int userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	
