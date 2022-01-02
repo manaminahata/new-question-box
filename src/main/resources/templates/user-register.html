@@ -14,7 +14,7 @@
 	<!-- ヘッダー -->
 	<nav
 		class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
-		<a class="navbar-brand" th:href="@{/question/index}">QuestionBox</a>
+		<a class="navbar-brand" th:href="@{/questionbox/index}">QuestionBox</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav4" aria-controls="navbarNav4"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -32,62 +32,66 @@
 		</div>
 	</nav>
 	<!-- パンくずリスト -->
-	<ol class="breadcrumb">
+	<!-- <ol class="breadcrumb">
 		<li><a href="user-register.html" th:href="@{/questionbox/user-register}">ユーザー登録</a></li>
 		<li class="active">登録確認</li>
 		<li class="active">登録完了</li>
-	</ol>
+	</ol> -->
 	<!-- ユーザー登録 -->
 	<div class="container">
 		<div class="main container-fluid">
 			<div class="row bg-light text-dark py-5">
-				<div class="col-md-8 offset-md-2">
+				<div class="offset-md-2　col-md-8">
 					<h2 class="fs-1 mb-5 text-center fw-bold">ユーザー登録</h2>
-					<form method="post" th:action="@{/questionbox/user-confirm}"
-						th:object="${userForm}">
-						<div class="mb-3">
-							<label for="name">名前</label><label th:errors="*{name}"
-								class="control-label" style="color: red" for="inputError">名前を入力してください</label>
-							<input type="text" class="form-control" name="name"
-								placeholder="名前" th:value="*{name}">
+					<form method="post" th:action="@{/questionbox/user-confirm}" th:object="${userForm}" class="needs-validation" novalidate>
+						<div class="mb-3 col-md-4">
+							<label for="name" class="fw-bold">名前</label>
+							<!-- <label th:errors="*{name}" class="control-label  form-label" style="color: red" for="inputError">名前を入力してください</label> -->
+							<input type="text" class="form-control" name="name" placeholder="例）山田太郎" th:value="*{name}">
+							<label th:errors="*{name}" class="control-label  form-label" style="color: red" for="inputError">名前を入力してください</label>
+							<div class="valid-feedback">Looks good!</div>
 						</div>
-						<div class="mb-3">
-							<label for="zipcode">郵便番号</label><label th:errors="*{zipcode}"
-								class="control-label" style="color: red" for="inputError">郵便番号を入力してください</label>
-							<input id="zipcode" type="text" class="zipcode form-control" name="zipcode" size="8"
-								placeholder="郵便番号（ハイフンあり）" th:value="*{zipcode}">
-							<a ><button id="get_address_btn" type="button" class="btn btn-default">住所検索</button></a>
+						<div class="row g-3">
+							<div class="mb-3 col-md-4">
+								<label for="zipcode" class="fw-bold">郵便番号</label><label th:errors="*{zipcode}"
+									class="control-label" style="color: red" for="inputError">郵便番号を入力してください</label>
+								<input id="zipcode" type="text" class="zipcode form-control form-label" name="zipcode" size="8"
+									placeholder="例）160-0022（ハイフンあり）" th:value="*{zipcode}">
+							</div>
+							<div class="col-md-6">
+								<a><button id="get_address_btn" type="button" class="btn btn-outline-secondary form-label">住所検索</button></a>
+							</div>
 						</div>
-						<div class="mb-3">
-							<label for="address">住所</label><label th:errors="*{address}"
+						<div class="mb-3 col-md-8">
+							<label for="address" class="fw-bold">住所</label><label th:errors="*{address}"
 								class="control-label" style="color: red" for="inputError">住所を入力してください</label>
 							<input id="address" type="text" class="form-control" name="address"
-								placeholder="住所" th:value="${address}">
+								placeholder="例）東京都新宿区新宿4丁目3-25 TOKYU REIT新宿ビル8F" th:value="${address}">
 						</div>
-						<div class="mb-3">
-							<label for="telephone">電話番号</label><label
+						<div class="mb-3 col-md-6">
+							<label for="telephone" class="fw-bold">電話番号</label><label
 								th:errors="*{telephone}" class="control-label"
 								style="color: red" for="inputError">電話番号を入力してください</label> <input
 								type="text" class="form-control" name="telephone"
-								placeholder="電話番号（ハイフンあり）" th:value="*{telephone}">
+								placeholder="例）03-6675-3638（ハイフンあり）" th:value="*{telephone}">
 						</div>
-						<div class="mb-3">
-							<label for="email">メールアドレス</label><label id="duplicateMessage" th:errors="*{email}"
+						<div class="mb-3 col-md-8">
+							<label for="email" class="fw-bold">メールアドレス</label><label id="duplicateMessage" th:errors="*{email}"
 								class="control-label" style="color: red" for="inputError">メールアドレスを入力してください</label>
 							<input id="email" type="email" class="form-control" name="email"
-								placeholder="メールアドレス" th:value="*{email}">
+								placeholder="例）t-yamada@sample.com" th:value="*{email}">
 						</div>
-						<div class="mb-3">
-							<label for="password">パスワード</label><label
+						<div class="mb-3 col-md-3">
+							<label for="password" class="fw-bold">パスワード</label><label
 								th:errors="*{password}" class="control-label" style="color: red"
 								for="inputError">パスワードを入力してください</label> <input id="password" type="password"
 								class="form-control" name="password" required
-								placeholder="パスワード（8桁以上16文字以下の英数字）" thvalue="*{password}">
+								placeholder="例）abcd1234（8桁以上16文字以下の半角英数字）" thvalue="*{password}">
 						</div>
-						<div class="mb-3">
-							<label for="password">パスワード（再確認）</label>
+						<div class="mb-3 col-md-3">
+							<label for="password" class="fw-bold">パスワード（再確認）</label>
 							<input type="password" class="form-control"
-								name="confirm" placeholder="確認用パスワード（8桁以上16文字以下の英数字）"
+								name="confirm" placeholder="例）abcd1234（上記で入力したパスワードを再度ご入力下さい）"
 								th:value="*{password}" oninput="CheckPassword(this)" required>
 						</div>
 						<div class="form-check mb-4">

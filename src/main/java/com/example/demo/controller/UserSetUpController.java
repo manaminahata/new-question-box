@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.domain.User;
 import com.example.demo.form.UserForm;
-import com.example.demo.form.UserLoginForm;
 import com.example.demo.service.UserService;
 
 /**
@@ -64,9 +63,10 @@ public class UserSetUpController {
 		User user = new User();
 		BeanUtils.copyProperties(userForm, user);
 		userService.signUp(user);
-		model.addAttribute(user);
+		session.setAttribute("user", user);
 		
-		System.out.println(user);
+		/* メールを送信する */
+		userService.sendEmail(user);
 		
 		return "user-confirm";
 	}
@@ -79,4 +79,5 @@ public class UserSetUpController {
 	public String userConfirm() {
 		return "user-result";
 	}
+	
 }
