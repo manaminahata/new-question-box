@@ -32,10 +32,10 @@
 		</div>
 	</nav>
 	<!-- パンくずリスト -->
-	<ol class="breadcrumb">
+	<!-- <ol class="breadcrumb">
 		<li><a href="user-register.html" th:href="@{/questionbox/index}">ホーム画面</a></li>
 		<li class="active">ユーザーログイン</li>
-	</ol>
+	</ol> -->
 	<!-- ユーザー登録 -->
 	<div class="container">
 		<div class="main container-fluid">
@@ -47,17 +47,14 @@
 					<form method="post" th:action="@{/questionbox/user-signin}"
 						th:object="${userLoginForm}">
 						<div class="mb-3">
-							<label for="email">メールアドレス</label><label th:errors="*{email}"
-								class="control-label" style="color: red" for="inputError">メールアドレスを入力してください</label>
-							<input type="email" class="form-control" name="email"
-								placeholder="メールアドレス" th:value="*{email}">
+							<label class="fw-bold" for="email">メールアドレス</label>
+							<input type="email" class="form-control" name="email" placeholder="メールアドレス" th:value="*{email}">
+							<label th:errors="*{email}" class="control-label" style="color: red" for="inputError">メールアドレスを入力してください</label>
 						</div>
 						<div class="mb-3">
-							<label for="password">パスワード</label><label
-								th:errors="*{password}" class="control-label" style="color: red"
-								for="inputError">パスワードを入力してください</label> <input type="password"
-								class="form-control" name="password"
-								placeholder="パスワード（8桁以上16文字以下の英数字）" th:value="*{password}">
+							<label class="fw-bold" for="password">パスワード</label>
+							<input type="password" class="form-control" name="password" placeholder="パスワード（8桁以上16文字以下の英数字）" th:value="*{password}">
+							<label th:errors="*{password}" class="control-label" style="color: red" for="inputError">パスワードを入力してください</label>
 						</div>
 						<div class="text-center pt-4 col-md-6 offset-md-3">
 							<button type="submit" class="btn btn-primary">ログイン</button>
@@ -67,6 +64,18 @@
 			</div>
 		</div>
 	</div>
+	<!-- フッター -->
+	<footer class="bg-dark text-muted text-center text-small py-5">
+		<p class="mb-1 text-light">&copy; 2021 Nahata Manami</p>
+			<ul class="list-inline">
+				<li class="list-inline-item">
+					<a class="text-decoration-none text-secondary" th:href="@{/questionbox/administrator-login}">管理者ログイン</a>
+				</li>
+				<li class="list-inline-item">
+					<a class="text-decoration-none text-secondary" th:href="@{/questionbox/administrator-register}">管理者登録</a>
+				</li>
+			</ul>
+	</footer>
 	<script src="https://cdn.jsdelivr.net/npm/fetch-jsonp@1.1.3/build/fetch-jsonp.min.js"></script>
 </body>
 </html>
