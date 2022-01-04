@@ -34,11 +34,11 @@
 		select users.id as u_id, users.name as u_name, questions.id as q_id, questions.title as q_title, questions.question as q_question  
 		 from users left join questions on users.id = questions.user_id where users.id = #{id};
 	</select>
-
+	
+	<!-- ユーザー情報を登録する -->
 	<insert id="insert">
-		insert into users(name, email, password, zipcode,
-		address, telephone)
-		values(#{name},#{email},#{password},#{zipcode},#{address},#{telephone});
+		insert into users(name, email, password, zipcode, address, telephone)
+		values(#{name}, #{email}, #{password}, #{zipcode}, #{address}, #{telephone});
 	</insert>
 
 	<select id="findByUsers"
